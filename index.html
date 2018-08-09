@@ -28,7 +28,7 @@
 <script>
 const getMyShit = () => {
   const order = 'GINGERANDTEA180801-1303-44120'; //hardcoding an order until i figure out how to dynamically get it
-  const url = 'https://api.fastspring.com/company/gingerandtea/order/'
+  const url = 'https://cors-anywhere.herokuapp.com/https://api.fastspring.com/company/gingerandtea/order/'
   const endpoint = `${url}${order}`;
   
   const xhr = new XMLHttpRequest();
