@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <link rel="stylesheet" href="stylesheet.css">
+  <script
+    id="fsc-api"
+    src="https://d1f8f9xcsvx3ha.cloudfront.net/sbl/0.7.6/fastspring-builder.min.js"
+    type="text/javascript"
+    data-storefront="gntea.test.onfastspring.com/popup-gntea">
+  </script>
+</head>
+<body>
+
+<div class="grid-container">
+  <div class="header">
+  <span style="float: left; font-size: 24px">Welcome to Kev's Thing</span>
+  <span style="float: right;">Checkout</span>
+  </div>
+  <div class="product-details-1">
+  <h3>Product Name</h3>
+  </div>
+  <div class="product-details-2">
+  <h3>Product Name</h3>
+  <button onclick="getMyShit()">Click Me</button>
+  </div>
+</div>
+
+<script>
+const getMyShit = () => {
+  const order = 'GINGERANDTEA180801-1303-44120'; //hardcoding an order until i figure out how to dynamically get it
+  const url = 'https://api.fastspring.com/company/gingerandtea/order/'
+  const endpoint = `${url}${order}`;
+  
+  const xhr = new XMLHttpRequest();
+
+  xhr.onreadystatechange = () => {
+    if (xhr.readyState === XMLHttpRequest.DONE) {
+      console.log(xhr.response);
+    }
+  }
+  
+  xhr.open('GET', endpoint);
+  xhr.setRequestHeader('Authorization', 'Basic WERZTVVGSENUTVNZV0haQ0lORk5GQTpxMm12ZWJ1UVRUYWk3ekZoMm9wdmZR') //using the base64 hash for now
+  xhr.send();
+}
+</script>
+
+</body>
+</html>
