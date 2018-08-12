@@ -1,33 +1,61 @@
 <!DOCTYPE html>
 <html>
 <head>
+  <title>Kev's Test Store</title>
   <link rel="stylesheet" href="stylesheet.css">
   <script
     id="fsc-api"
     src="https://d1f8f9xcsvx3ha.cloudfront.net/sbl/0.7.6/fastspring-builder.min.js"
     type="text/javascript"
+    data-popup-closed="onPopupClose"
     data-storefront="gntea.test.onfastspring.com/popup-gntea">
   </script>
 </head>
-<body>
 
+<body>
 <div class="grid-container">
+  <div class="header-left"></div>
+  <div class="header-right"></div>
   <div class="header">
   <span style="float: left; font-size: 24px">Welcome to Kev's Thing</span>
-  <span style="float: right;">Checkout</span>
+  <span style="float: right;" ><a href="#" data-fsc-action="Checkout" style="color: black">Checkout - <span data-fsc-order-total></span></a></span>
   </div>
   <div class="product-details-1">
-  <h3>Product Name</h3>
+    <span>Ginger Tea - $5</span>
+    <a href="#" data-fsc-item-path-value="ginger-tea" data-fsc-action="Add" data-fsc-item-path="ginger-tea" data-fsc-item-selection-smartdisplay-inverse>Add to cart</a>
+    <a href="#" data-fsc-item-path-value="ginger-tea" data-fsc-action="Remove" data-fsc-item-path="ginger-tea" data-fsc-item-selection-smartdisplay>Remove from Cart</a>
   </div>
   <div class="product-details-2">
-  <h3>Product Name</h3>
-  <button onclick="getMyShit()">Click Me</button>
+    <span>Oolong Tea - $4</span>
+    <a href="#" data-fsc-item-path-value="oolong-tea" data-fsc-action="Add" data-fsc-item-path="oolong-tea" data-fsc-item-selection-smartdisplay-inverse>Add to cart</a>
+    <a href="#" data-fsc-item-path-value="oolong-tea" data-fsc-action="Remove" data-fsc-item-path="oolong-tea" data-fsc-item-selection-smartdisplay>Remove from Cart</a>
   </div>
+  <div class="product-details-3">
+    <span>Earl Grey Tea - $6</span>
+    <a href="#" data-fsc-item-path-value="earl-grey-tea" data-fsc-action="Add" data-fsc-item-path="earl-grey-tea" data-fsc-item-selection-smartdisplay-inverse>Add to cart</a>
+    <a href="#" data-fsc-item-path-value="earl-grey-tea" data-fsc-action="Remove" data-fsc-item-path="earl-grey-tea" data-fsc-item-selection-smartdisplay>Remove from Cart</a>  </div>
+</div>
+
+<div class="footer" style="padding: 7px">
+  <span>Made with &hearts; by Kevin &bull; <a href="https://github.com/imperialself/gingerandtea">Github</a></span>
 </div>
 
 <script>
+    function onFSPopupClosed(orderReference) {
+      if (orderReference)
+      {
+           console.log(orderReference.reference);
+           fastspring.builder.reset();
+           window.location.replace("http://gingerandtea.com/thanks.html?orderId=" + orderReference.reference);
+      } else {
+           console.log("no order ID");
+    }
+    }
+</script>
+
+<script>
 const getMyShit = () => {
-  const order = 'GINGERANDTEA180801-1303-44120'; //hardcoding an order until i figure out how to dynamically get it
+  const order = orderReference;
   const url = 'https://cors-anywhere.herokuapp.com/https://api.fastspring.com/company/gingerandtea/order/'
   const endpoint = `${url}${order}`;
   
