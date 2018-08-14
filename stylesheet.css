@@ -17,6 +17,8 @@
 .header { 
 	grid-area: header-center;
 	background-color: #0099CC;
+  padding-top: 6px;
+  padding-bottom: 6px;
 }
 
 .header-left { 
@@ -49,6 +51,7 @@
 .header { 
   grid-area: header-center;
   background-color: #0099CC;
+  padding: 4px;
 }
 }
 
