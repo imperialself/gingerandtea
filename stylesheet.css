@@ -1,10 +1,10 @@
-@media (min-width: 768px) {
+@media only screen and (min-width: 768px) {
 .grid-container {
   display: grid;
   height: 100%;
   grid-template-columns: 1fr 2fr 1fr;
   grid-template-rows: auto auto auto;
-  grid-gap: 0px 0px;
+  grid-gap: 24px 0px;
   grid-template-areas: "header-left header-center header-right" ". product-details-1 ." ". product-details-2 ." ". product-details-3 .";
 }
 
@@ -30,7 +30,7 @@
 }
 }
 
-@media (max-width: 768px) {
+@media only screen and (max-width: 768px) {
 .grid-container {
   display: grid;
   height: 100%;
@@ -40,9 +40,9 @@
   grid-template-areas: "header-center" "product-details-1" "product-details-2" "product-details-3";
 }
 
-.product-details-2 { grid-area: product-details-2; }
-
 .product-details-1 { grid-area: product-details-1; }
+
+.product-details-2 { grid-area: product-details-2; }
 
 .product-details-3 { grid-area: product-details-3; }
 
@@ -52,13 +52,13 @@
 }
 }
 
-.btn {
-  color: #0099CC;
+button {
+  color: #ffffff;
   background: transparent;
   border: 2px solid #0099CC;
   border-radius: 6px;
 }
-.btn1:hover {
+button:hover {
   background-color: #0099CC;
   color: white;
 }
@@ -80,4 +80,19 @@ body {
 
 a {
   color: #0099CC;
+}
+
+table {
+  padding-right: 24px;
+  padding-left: 24px;
+}
+
+.description {
+  padding-left: 24px;
+}
+
+.thanks {
+  padding-top: 48px;
+  padding-left: 24px;
+  padding-right: 24px;
 }

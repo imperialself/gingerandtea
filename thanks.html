@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Kev's Test Store</title>
+  <link rel="stylesheet" href="stylesheet.css">
+  <script
+    id="fsc-api"
+    src="https://d1f8f9xcsvx3ha.cloudfront.net/sbl/0.7.6/fastspring-builder.min.js"
+    type="text/javascript"
+    data-storefront="gntea.test.onfastspring.com/popup-gntea">
+  </script>
+</head>
+
+<body onload="getMyShit()">
+<div class="grid-container">
+  <div class="header-left"></div>
+  <div class="header-right"></div>
+  <div class="header">
+  <span style="float: left; font-size: 24px">Ginger + Tea<span style="font-size: 16px">, a tea store for the curious</span></span>
+  <span style="float: right;" ><a href="#" data-fsc-action="Checkout" style="color: black">Checkout - <span data-fsc-order-total></span></a></span>
+  </div>
+  <div class="product-details-1">
+    <div class="thanks">
+    Thanks for ordering, <span id="name"></span>!</br>
+    Your order number is: <span id="order"></span><br>
+    Expect your order containing <span id="products"></span> to arrive at your door in 7 days.
+    </div>
+  </div>
+</div>
+
+<div class="footer" style="padding: 7px">
+  <span>Made with &hearts; by Kevin &bull; <a href="https://github.com/imperialself/gingerandtea">Github</a></span>
+</div>
+
+
+<script>
+const getMyShit = () => {
+  var urlParams = new URLSearchParams(window.location.search); //best method for grabbing query strings
+  const order = urlParams.get('order');
+  const url = 'https://cors-anywhere.herokuapp.com/https://api.fastspring.com/company/gingerandtea/order/' //nobody likes CORS so we're avoiding it here
+  const endpoint = `${url}${order}`; //concat the full request URL
+  
+  const xhr = new XMLHttpRequest();
+  xhr.onreadystatechange = () => { //read the response of the request once it is complete
+    if (xhr.readyState === XMLHttpRequest.DONE) {
+      var xmlResponse = xhr.response;
+      
+      //time to parse that XML data
+      parser = new DOMParser(); 
+      xmlDoc = parser.parseFromString(xmlResponse, "text/xml");
+
+      //time to insert that in the page
+      document.getElementById("order").innerHTML = xmlDoc.getElementsByTagName("reference")[0].childNodes[0].nodeValue;
+      document.getElementById("name").innerHTML = xmlDoc.getElementsByTagName("firstName")[0].childNodes[0].nodeValue;
+      document.getElementById("products").innerHTML = xmlDoc.getElementsByTagName("productDisplay")[0].childNodes[0].nodeValue; 
+    }
+  }
+  
+  //this actually sends the request, the 
+  xhr.open('GET', endpoint);
+  xhr.setRequestHeader('Authorization', 'Basic WERZTVVGSENUTVNZV0haQ0lORk5GQTpxMm12ZWJ1UVRUYWk3ekZoMm9wdmZR') //using the base64 hash for now
+  xhr.send();
+}
+</script>
+
+</body>
+</html>
