@@ -17,95 +17,13 @@
   <div class="header-left"></div>
   <div class="header-right"></div>
   <div class="header">
-  <span style="float: left; font-size: 24px">Ginger + Tea<span style="font-size: 16px">, a tea store for the curious</span></span>
-  <span style="float: right;" ><button class="btn btn1" href="#" data-fsc-action="Checkout">Checkout - <span data-fsc-order-total></span></button></span>
+    <span style="float: left; font-size: 24px">Ginger + Tea<span style="font-size: 16px">, a tea store for the curious</span></span>
+    <span style="float: right;" ><button class="btn btn1" href="#" data-fsc-action="Checkout">Checkout - <span data-fsc-order-total></span></button></span>
   </div>
   <div class="product-details-1">
-    <table>
-      <tbody>
-        <tr>
-          <td>
-            <img src="https://gingerandtea.com/assets/ginger-tea.jpg" width="200px">
-          </td>
-          <td>
-            <div class="description">
-            <span>Ginger Tea - $5</span>
-            <a href="#" data-fsc-item-path-value="ginger-tea" data-fsc-action="Add" data-fsc-item-path="ginger-tea" data-fsc-item-selection-smartdisplay-inverse>Add to cart</a>
-            <a href="#" data-fsc-item-path-value="ginger-tea" data-fsc-action="Remove" data-fsc-item-path="ginger-tea" data-fsc-item-selection-smartdisplay>Remove from Cart</a>
-            <select data-fsc-item-quantity-value data-fsc-item-quantity data-fsc-item-path-value="ginger-tea" data-fsc-item-path="ginger-tea" data-fsc-action="Update" data-fsc-item-selection-smartdisplay style="width:50px;">
-              <option value='1'>1</option>
-              <option value='2'>2</option>
-              <option value='3'>3</option>
-              <option value='4'>4</option>
-              <option value='5'>5</option>
-              <option value='6'>6</option>
-              <option value='7'>7</option>
-              <option value='8'>8</option>
-              <option value='9'>9</option>
-            </select>
-            </div>
-          </td>
-        </tr>
-       </tbody>
-    </table>
-  </div>
-  <div class="product-details-2">
-    <table>
-      <tbody>
-        <tr>
-          <td>
-            <img src="https://gingerandtea.com/assets/oolong-tea.jpg" width="200px">
-          </td>
-          <td>
-            <div class="description">
-            <span>Oolong Tea - $4</span>
-            <a href="#" data-fsc-item-path-value="oolong-tea" data-fsc-action="Add" data-fsc-item-path="oolong-tea" data-fsc-item-selection-smartdisplay-inverse>Add to cart</a>
-            <a href="#" data-fsc-item-path-value="oolong-tea" data-fsc-action="Remove" data-fsc-item-path="oolong-tea" data-fsc-item-selection-smartdisplay>Remove from Cart</a>
-            <select data-fsc-item-quantity-value data-fsc-item-quantity data-fsc-item-path-value="oolong-tea" data-fsc-item-path="oolong-tea" data-fsc-action="Update" data-fsc-item-selection-smartdisplay style="width:50px;">
-              <option value='1'>1</option>
-              <option value='2'>2</option>
-              <option value='3'>3</option>
-              <option value='4'>4</option>
-              <option value='5'>5</option>
-              <option value='6'>6</option>
-              <option value='7'>7</option>
-              <option value='8'>8</option>
-              <option value='9'>9</option>
-            </select>
-            </div>
-          </td>
-        </tr>
-       </tbody>
-    </table>
-  </div>
-  <div class="product-details-3">
-    <table>
-      <tbody>
-        <tr>
-          <td>
-            <img src="https://gingerandtea.com/assets/earl-grey-tea.jpg" width="200px">
-          </td>
-          <td>
-            <div class="description">
-            <span>Earl Grey Tea - $6</span>
-            <a href="#" data-fsc-item-path-value="earl-grey-tea" data-fsc-action="Add" data-fsc-item-path="earl-grey-tea" data-fsc-item-selection-smartdisplay-inverse>Add to cart</a>
-            <a href="#" data-fsc-item-path-value="earl-grey-tea" data-fsc-action="Remove" data-fsc-item-path="earl-grey-tea" data-fsc-item-selection-smartdisplay>Remove from Cart</a>
-            <select data-fsc-item-quantity-value data-fsc-item-quantity data-fsc-item-path-value="earl-grey-tea" data-fsc-item-path="earl-grey-tea" data-fsc-action="Update" data-fsc-item-selection-smartdisplay style="width:50px;">
-              <option value='1'>1</option>
-              <option value='2'>2</option>
-              <option value='3'>3</option>
-              <option value='4'>4</option>
-              <option value='5'>5</option>
-              <option value='6'>6</option>
-              <option value='7'>7</option>
-              <option value='8'>8</option>
-              <option value='9'>9</option>
-            </select>
-            </div>
-          </td>
-        </tr>
-       </tbody>
-    </table>
+    <p class="store-monologue">The story of tea begins in China. According to legend, in 2737 BC, the Chinese emperor Shen Nung was sitting beneath a tree while his servant boiled drinking water, when some leaves from the tree blew into the water. ... The tree was a Camellia sinensis, and the resulting drink was what we now call tea.<br><br>All that to say, welcome to my store!</p>
+    <span id="products-header">Products:</span>
+    <div id="product-table"></div>
   </div>
 </div>
 
@@ -113,6 +31,84 @@
   <span>Made with &hearts; by Kevin &bull; <a href="https://github.com/imperialself/gingerandtea">Github</a></span>
 </div>
 
+<!-- script to build the store -->
+<script>
+(function() {
+  function buildProducts() {
+    // storing the HTML output
+    const output = [];
+
+    //we want to start off with the HTML to start a proper table
+    output.push(
+      `<table><tbody>`
+      );
+    // for each product
+    myProducts.forEach((currentProduct) => {
+      // add this product's <tr> to the output
+      output.push(
+        `<tr>
+          <td>
+            <img src="${currentProduct.image}" width="200px">
+          </td>
+          <td class="product-middle-column">
+            <span class="product-name"><span data-fsc-item-path="${currentProduct.path}" data-fsc-item-display></span> - <span data-fsc-item-path="${currentProduct.path}" data-fsc-item-price></span></span><br>
+            <span class="product-summary" data-fsc-item-path="${currentProduct.path}" data-fsc-item-description-summary></span>
+          </td>
+          <td class="add-to-cart">
+            <a href="#" data-fsc-item-path-value="${currentProduct.path}" data-fsc-action="Add" data-fsc-item-path="${currentProduct.path}" data-fsc-item-selection-smartdisplay-inverse>Add to cart</a>
+            <a href="#" data-fsc-item-path-value="ginger-tea" data-fsc-action="Remove" data-fsc-item-path="${currentProduct.path}" data-fsc-item-selection-smartdisplay>Remove from Cart</a>
+            <span span data-fsc-item-path="${currentProduct.path}" data-fsc-item-selection-smartdisplay>Quantity: </span>
+            <select data-fsc-item-quantity-value data-fsc-item-quantity data-fsc-item-path-value="${currentProduct.path}" data-fsc-item-path="${currentProduct.path}" data-fsc-action="Update" data-fsc-item-selection-smartdisplay style="width:50px;">
+              <option value='1'>1</option>
+              <option value='2'>2</option>
+              <option value='3'>3</option>
+              <option value='4'>4</option>
+              <option value='5'>5</option>
+              <option value='6'>6</option>
+              <option value='7'>7</option>
+              <option value='8'>8</option>
+              <option value='9'>9</option>
+            </select>
+          </td>
+        </tr>`
+      );
+    });
+
+    //after the for loop is done we want to complete the table code
+    output.push (
+      `</tbody></table>`
+      );
+
+    // combine our output into one string of HTML and put it on the page
+    productContainer.innerHTML = output.join("");
+  }
+
+  const productContainer = document.getElementById("product-table");
+
+  //My list of products
+  const myProducts = [
+  {
+    path: "ginger-tea",
+    image: "https://gingerandtea.com/assets/ginger-tea.jpg",
+  },
+  {
+    path: "oolong-tea",
+    image: "https://gingerandtea.com/assets/oolong-tea.jpg",
+  },
+  {
+    path: "earl-grey-tea",
+    image: "https://gingerandtea.com/assets/earl-grey-tea.jpg",
+  }
+  ];
+  // display quiz right away
+  buildProducts();
+
+})();
+</script>
+
+
+
+<!-- script to handle the redirect after the order submission -->
 <script>
     function onFSPopupClosed(orderReference) {
       if (orderReference)
