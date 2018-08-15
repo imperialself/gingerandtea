@@ -11,7 +11,7 @@
   </script>
 </head>
 
-<body onload="getMyShit()">
+<body onload="getOrderDetails()">
 <div class="grid-container">
   <div class="header-left"></div>
   <div class="header-right"></div>
@@ -23,7 +23,7 @@
     <div class="thanks">
     Thanks for ordering, <span id="name"></span>!</br>
     Your order number is: <span id="order"></span><br>
-    Expect your order containing <span id="products"></span> to arrive at your door in 7 days.
+    We'll be shipping your order to <span id="addressLine1"></span>, <span id="city"></span> <span id="state"></span> within 7 days.
     </div>
   </div>
 </div>
@@ -34,7 +34,7 @@
 
 
 <script>
-const getMyShit = () => {
+const getOrderDetails = () => {
   var urlParams = new URLSearchParams(window.location.search); //best method for grabbing query strings
   const order = urlParams.get('order');
   const url = 'https://cors-anywhere.herokuapp.com/https://api.fastspring.com/company/gingerandtea/order/' //nobody likes CORS so we're avoiding it here
@@ -52,7 +52,12 @@ const getMyShit = () => {
       //time to insert that in the page
       document.getElementById("order").innerHTML = xmlDoc.getElementsByTagName("reference")[0].childNodes[0].nodeValue;
       document.getElementById("name").innerHTML = xmlDoc.getElementsByTagName("firstName")[0].childNodes[0].nodeValue;
-      document.getElementById("products").innerHTML = xmlDoc.getElementsByTagName("productDisplay")[0].childNodes[0].nodeValue; 
+      document.getElementById("addressLine1").innerHTML = xmlDoc.getElementsByTagName("addressLine1")[0].childNodes[0].nodeValue;
+      document.getElementById("city").innerHTML = xmlDoc.getElementsByTagName("city")[0].childNodes[0].nodeValue;
+      var region = xmlDoc.getElementsByTagName("region")[0].childNodes[0].nodeValue;
+      //pretty up state, remove "US-" from beginning of string
+      state = region.slice(3);
+      document.getElementById("state").innerHTML = state;
     }
   }
   
